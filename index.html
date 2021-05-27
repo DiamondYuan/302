@@ -29,7 +29,7 @@
     border-radius: 4px;
     z-index: 3;
     padding: 8px 24px;
-    min-width: 600px;
+    width: 600px;
     font-size: 16px;
     line-height: 24px;
   }
@@ -45,21 +45,34 @@
     cursor: pointer;
     font-size: 16px;
   }
+
+  #show {
+    color: rgba(0, 0, 0, .85);
+    margin-top: 8px;
+    word-break: break-all;
+    width: 600px;
+    font-size: 16px;
+  }
 </style>
 
 <body>
   <div id="container">
     <input id="url" placeholder="请输入你要跳转的网址"></input>
     <button id="copy">拷贝</button>
+    <div id="show"></div>
   </div>
 </body>
 
 <script type="text/javascript">
   function init() {
+    const current = new URL(window.location.href);
     const input = document.getElementById('url');
     let url;
+
     input.addEventListener('input', e => {
       url = e.target.value;
+      current.searchParams.set('location', url);
+      document.getElementById('show').innerText = `永久连接: ${current.toString()}`
     });
 
     const button = document.getElementById('copy');
@@ -68,12 +81,10 @@
     });
 
     document.addEventListener('copy', function (e) {
-      current.searchParams.set('location', url);
       e.clipboardData.setData('text/plain', current.toString());
       e.preventDefault();
     });
 
-    const current = new URL(window.location.href);
     for (const queryName of ['location', 'goto']) {
       if (current.searchParams.get(queryName)) {
         window.location.href = current.searchParams.get(queryName)
