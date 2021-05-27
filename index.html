@@ -65,17 +65,21 @@
 
 <script type="text/javascript">
   function init() {
+    //解析当前网址，储存到一个叫做 current 的变量。
     const current = new URL(window.location.href);
+    //获取输入框
     const input = document.getElementById('url');
-    let url;
 
+    //监听输入框的输入
     input.addEventListener('input', e => {
-      url = e.target.value;
-      current.searchParams.set('location', url);
+      //获取输入框的内容，设置到 current 的 location 参数
+      current.searchParams.set('location', e.target.value);
+      //更新永久链接
       document.getElementById('show').innerText = `永久连接: ${current.toString()}`
     });
 
     const button = document.getElementById('copy');
+    //监听拷贝按钮
     button.addEventListener('click', () => {
       document.execCommand('copy');
     });
