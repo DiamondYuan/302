@@ -16,33 +16,36 @@
 </body>
 
 <script type="text/javascript">
-  const current = new URL(window.location.href);
-  for (const queryName of ['location', 'goto']) {
-    if (current.searchParams.get(queryName)) {
-      window.location.href = current.searchParams.get(queryName);
-      setTimeout(() => {
-        window.close();
-      }, 100);
-      break
+  function init() {
+    const input = document.getElementById('url');
+    let url;
+    input.addEventListener('input', e => {
+      url = e.target.value;
+    });
+
+    const button = document.getElementById('copy');
+    button.addEventListener('click', () => {
+      document.execCommand('copy');
+    });
+
+    document.addEventListener('copy', function (e) {
+      current.searchParams.set('location', url);
+      e.clipboardData.setData('text/plain', current.toString());
+      e.preventDefault();
+    });
+
+    const current = new URL(window.location.href);
+    for (const queryName of ['location', 'goto']) {
+      if (current.searchParams.get(queryName)) {
+        window.location.href = current.searchParams.get(queryName)
+        setTimeout(() => {
+          window.close();
+        }, 100);
+        return
+      }
     }
   }
-
-  const input = document.getElementById('url');
-  let url;
-  input.addEventListener('input', e => {
-    url = e.target.value;
-  });
-
-  const button = document.getElementById('copy');
-  button.addEventListener('click', () => {
-    document.execCommand('copy');
-  });
-
-  document.addEventListener('copy', function (e) {
-    current.searchParams.set('location', url);
-    e.clipboardData.setData('text/plain', current.toString());
-    e.preventDefault();
-  });
+  init()
 </script>
 
 </html>
