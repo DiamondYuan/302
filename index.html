@@ -7,11 +7,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>302</title>
 </head>
+<style type="text/css">
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #url {
+    background: #fff;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    border-radius: 4px;
+    z-index: 3;
+    padding: 8px 24px;
+    min-width: 600px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  #copy {
+    background: #0170fe;
+    color: white;
+    border: 1px solid #0170fe;
+    box-shadow: none;
+    padding: 8px 24px;
+    border-radius: 4px;
+    height: auto;
+    cursor: pointer;
+    font-size: 16px;
+  }
+</style>
 
 <body>
-  <div>
-    <input id="url" type=""></input>
-    <button id="copy">Copy</button>
+  <div id="container">
+    <input id="url" placeholder="请输入你要跳转的网址"></input>
+    <button id="copy">拷贝</button>
   </div>
 </body>
 
